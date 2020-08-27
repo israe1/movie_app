@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Previous" />
-    <item android:title="Next" />
-    <item android:title="Top Rated" />
-    <item android:title="Popular" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Previous"
+        app:showAsAction="ifRoom"
+        android:id="@+id/option_previous"
+        android:icon="@drawable/ic_previous_24"/>
+    <item
+        android:title="Next"
+        app:showAsAction="ifRoom"
+        android:id="@+id/option_next"
+        android:icon="@drawable/ic_next_24"/>
+    <item
+        android:title="Top Rated"
+        android:id="@+id/option_top_rated"/>
+    <item
+        android:title="Popular"
+        android:id="@+id/option_popular"/>
 </menu>
