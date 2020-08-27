@@ -1,6 +1,7 @@
 package com.israel.movieapp.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.israel.movieapp.R;
 import com.israel.movieapp.models.Movie;
+import com.israel.movieapp.ui.movie_detail.MovieDetailActivity;
 
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+    public static final String MOVIE = "movie";
+    public static final String BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w185";
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private Context mContext;
 
@@ -57,6 +61,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             mRatingBar = itemView.findViewById(R.id.rbMovie);
             mTextViewTitle = itemView.findViewById(R.id.tvMovieTitle);
             mTextViewVoteCount = itemView.findViewById(R.id.tvVoteCount);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Movie movie){
@@ -65,15 +70,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             mTextViewVoteCount.setText(String.valueOf(mMovie.getVote_count()));
             mRatingBar.setRating((float) (mMovie.getVote_average() / 2));
 
-            String baseImageUrl = "http://image.tmdb.org/t/p/w185";
             Glide.with(itemView.getContext())
-                    .load(baseImageUrl.concat(mMovie.getPoster_path()))
+                    .load(BASE_IMAGE_URL.concat(mMovie.getPoster_path()))
                     .into(mImageView);
         }
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(mContext, MovieDetailActivity.class);
+            intent.putExtra(MOVIE, mMovie);
+            mContext.startActivity(intent);
         }
     }
 }
